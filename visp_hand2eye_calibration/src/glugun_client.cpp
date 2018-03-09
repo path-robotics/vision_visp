@@ -5,27 +5,16 @@
 #include <glugun_camera/camera_config_loader.h>
 #include <vector>
 #include <map>
-#include "visp_hand2eye_calibration/compute_effector_camera.h"
 #include "visp_hand2eye_calibration/compute_effector_camera_quick.h"
-#include "client.h"
-#include <geometry_msgs/Transform.h>
-#include "visp_hand2eye_calibration/TransformArray.h"
-#include <visp_bridge/3dpose.h>
 #include "names.h"
-
-#include <visp/vpCalibration.h>
-#include <visp/vpExponentialMap.h>
 
 int main(int argc,char**argv){
   ros::init(argc, argv, "glugun_client");
   ros::NodeHandle nh;
 
-  ros::ServiceClient compute_effector_camera_service_ =
-    nh.serviceClient<visp_hand2eye_calibration::compute_effector_camera> (visp_hand2eye_calibration::compute_effector_camera_service);
   ros::ServiceClient compute_effector_camera_quick_service_ =
     nh.serviceClient<visp_hand2eye_calibration::compute_effector_camera_quick> (visp_hand2eye_calibration::compute_effector_camera_quick_service);
 
-  visp_hand2eye_calibration::compute_effector_camera emc_comm;
   visp_hand2eye_calibration::compute_effector_camera_quick emc_quick_comm;
 
 
