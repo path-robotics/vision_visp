@@ -9,7 +9,7 @@ find_package(catkin REQUIRED COMPONENTS
   sensor_msgs
   std_msgs
   visp_bridge
-  glugun_camera # For CameraConfigLoader
+  glugun_camera # For CameraConfigLoader and LocateCamera.srv
 )
 
 # ViSP cannot be found by Catkin.
@@ -17,6 +17,7 @@ find_package(catkin REQUIRED COMPONENTS
 find_package(VISP REQUIRED)
 
 include_directories(
+  include
   ${Boost_INCLUDE_DIRS}
   ${VISP_INCLUDE_DIRS}
   ${catkin_INCLUDE_DIRS}
@@ -86,7 +87,7 @@ add_dependencies(${PROJECT_NAME}_client
   ${PROJECT_NAME}_gencpp)
 
 add_executable(glugun_client
-  src/glugun_client.cpp
+  src/glugun_client_main.cpp src/glugun_client.cpp
 )
 target_link_libraries(glugun_client
   ${PROJECT_NAME}_common
