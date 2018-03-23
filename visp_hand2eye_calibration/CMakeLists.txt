@@ -17,7 +17,6 @@ find_package(catkin REQUIRED COMPONENTS
 find_package(VISP REQUIRED)
 
 include_directories(
-  include
   ${Boost_INCLUDE_DIRS}
   ${VISP_INCLUDE_DIRS}
   ${catkin_INCLUDE_DIRS}
@@ -87,8 +86,10 @@ add_dependencies(${PROJECT_NAME}_client
   ${PROJECT_NAME}_gencpp)
 
 add_executable(glugun_client
-  src/glugun_client_main.cpp src/glugun_client.cpp
-)
+  src/glugun_client.cpp
+  src/glugun_client.h
+  src/glugun_client_main.cpp
+  )
 target_link_libraries(glugun_client
   ${PROJECT_NAME}_common
   ${catkin_LIBRARIES}

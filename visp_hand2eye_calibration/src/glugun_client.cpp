@@ -7,7 +7,7 @@
 #include <map>
 #include <glugun_camera/LocateCamera.h>
 #include "names.h"
-#include "visp_hand2eye_calibration/glugun_client.h"
+#include "glugun_client.h"
 
 using namespace glugun;
 
