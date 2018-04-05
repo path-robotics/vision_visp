@@ -10,16 +10,20 @@ find_package(catkin REQUIRED COMPONENTS
   std_msgs
   visp_bridge
   glugun_camera # For CameraConfigLoader and LocateCamera.srv
+  tf2_ros
+  tf2_eigen
 )
 
 # ViSP cannot be found by Catkin.
 # see https://github.com/ros/catkin/issues/606
 find_package(VISP REQUIRED)
+find_package(Eigen3)
 
 include_directories(
   ${Boost_INCLUDE_DIRS}
   ${VISP_INCLUDE_DIRS}
   ${catkin_INCLUDE_DIRS}
+  ${EIGEN3_INCLUDE_DIRS}
 )
 
 # Generate messages and services.
@@ -46,6 +50,9 @@ catkin_package(
     roscpp
     sensor_msgs
     std_msgs
+    glugun_camera
+    tf2_ros
+    tf2_eigen
 )
 
 add_library(${PROJECT_NAME}_common
