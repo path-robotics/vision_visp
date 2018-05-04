@@ -111,8 +111,14 @@ install(
     ${PROJECT_NAME}_calibrator
     ${PROJECT_NAME}_client
     ${PROJECT_NAME}_common
+    glugun_client
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
+## Mark other files for installation (e.g. launch and bag files, etc.)
+install(FILES
+  launch/locate_camera_server.launch
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/launch
+)
