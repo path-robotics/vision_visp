@@ -33,8 +33,8 @@ bool Client::locate_camera_cb(glugun_camera::LocateCamera::Request &req,
   bool success = true;
 
   // Get path path to 'glugun_camera' package
-  std::string ros_pkg_path = ros::package::getPath("glugun_camera");
-  std::string config_dir_path = ros_pkg_path + "/config/";
+  std::string ros_pkg_path = ros::package::getPath("glugun_config");
+  std::string config_dir_path = ros_pkg_path + "/glugun_camera.config/";
 
   // Instaniate a CameraConfigLoader object
   glugun::CameraConfigLoader loader(config_dir_path);
