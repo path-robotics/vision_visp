@@ -9,16 +9,21 @@ find_package(catkin REQUIRED COMPONENTS
   sensor_msgs
   std_msgs
   visp_bridge
+  glugun_camera # For CameraConfigLoader and LocateCamera.srv
+  tf2_ros
+  tf2_eigen
 )
 
 # ViSP cannot be found by Catkin.
 # see https://github.com/ros/catkin/issues/606
 find_package(VISP REQUIRED)
+find_package(Eigen3)
 
 include_directories(
   ${Boost_INCLUDE_DIRS}
   ${VISP_INCLUDE_DIRS}
   ${catkin_INCLUDE_DIRS}
+  ${EIGEN3_INCLUDE_DIRS}
 )
 
 # Generate messages and services.
@@ -45,6 +50,9 @@ catkin_package(
     roscpp
     sensor_msgs
     std_msgs
+    glugun_camera
+    tf2_ros
+    tf2_eigen
 )
 
 add_library(${PROJECT_NAME}_common
@@ -84,13 +92,33 @@ add_dependencies(${PROJECT_NAME}_client
   ${catkin_EXPORTED_TARGETS}
   ${PROJECT_NAME}_gencpp)
 
+add_executable(glugun_client
+  src/glugun_client.cpp
+  src/glugun_client.h
+  src/glugun_client_main.cpp
+  )
+target_link_libraries(glugun_client
+  ${PROJECT_NAME}_common
+  ${catkin_LIBRARIES}
+  ${roscpp_LIBRARIES}
+  )
+add_dependencies(glugun_client
+  ${catkin_EXPORTED_TARGETS}
+  ${PROJECT_NAME}_gencpp)
+
 install(
   TARGETS
     ${PROJECT_NAME}_calibrator
     ${PROJECT_NAME}_client
     ${PROJECT_NAME}_common
+    glugun_client
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
+## Mark other files for installation (e.g. launch and bag files, etc.)
+install(FILES
+  launch/locate_camera_server.launch
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/launch
+)

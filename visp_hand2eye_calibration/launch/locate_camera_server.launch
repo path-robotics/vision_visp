@@ -1,0 +1,7 @@
+<launch>
+  <!-- Launch the actual hand2eye calibration server plus our go-between server -->
+  <node pkg="visp_hand2eye_calibration" type="glugun_client" name="glugun_client" output="log" />
+
+  <node pkg="visp_hand2eye_calibration" type="visp_hand2eye_calibration_calibrator" name="visp_hand2eye_calibration_calibrator" output="log" />
+
+</launch>
